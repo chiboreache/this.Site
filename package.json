@@ -1,0 +1,25 @@
+{
+  "name": "GVWorks",
+  "version": "0.0.1",
+  "description": "Home Page",
+  "author": "Kron Austrum <huyach@protonmail.ch>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "deploy": "nuxt build && gcloud app deploy app.yaml | yes",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "*",
+    "@nuxtjs/style-resources": "^0.1.2",
+    "axios": "^0.18.0",
+    "coffee-loader": "^0.8.0",
+    "coffeescript": "^2.0.1",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
+  }
+}
