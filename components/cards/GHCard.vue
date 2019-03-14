@@ -31,8 +31,8 @@
             h3 {{ description }}
             #dev
               p lenTitle is tooMuch: {{ lenTitle }}
-              p ratelimit: {{ ratelimit }}
-              //- p(v-once) ratelimit: {{ ratelimit }}
+              //- p ratelimit: {{ ratelimit }}
+              p(v-once) ratelimit: {{ ratelimit }}
         main
           slot
         footer
@@ -60,7 +60,7 @@ export default
     stargazersCount: ''
     description: ''
     htmlUrl: ''
-    # ratelimit: ''
+    ratelimit: ''
     url: 'https://api.github.com/repos/chiboreache/'
     urlImage: 'https://raw.githubusercontent.com/chiboreache/'
     cardBackfaceEnabled: false
@@ -76,7 +76,7 @@ export default
       @stargazersCount = response.data.stargazers_count
       @description = response.data.description
       @htmlUrl = response.data.html_url
-      ratelimit = response.headers['x-ratelimit-remaining']
+      @ratelimit = response.headers['x-ratelimit-remaining']
     getImg: ->
       @urlImage + @repoName + '/master/img/image-1.png'
 </script>

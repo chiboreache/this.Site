@@ -13,7 +13,7 @@
         )
       .second(
         style="--second-bg-image: url(\
-          https://cdn-images-1.medium.com/max/1200/1*ktJUMJO60oHoluiEV6KBmA.png \
+          https://firebasestorage.googleapis.com/v0/b/myawesomeasyncdb.appspot.com/o/stack%2Fcoffeescript.svg?alt=media&token=b9d28956-ffed-4251-abf7-52033eb616a4 \
           )"
         )
       .third(

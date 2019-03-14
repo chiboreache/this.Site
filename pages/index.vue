@@ -51,13 +51,13 @@ section
       .stack(slot='stack-list'
         )
         Python
-    PlainCard
+    GDCard
       span(slot='title') GD
       span(slot='subtitle') Unreal Engine 4  Epic Marketplace Game Development
       span(slot='footer')
         a(href='https://www.unrealengine.com/marketplace/en-US/profile/GVWorks?sessionInvalidated=true') Marketplace 
         a(href='https://olegkondratov.artstation.com/') Artstation
-    PlainCard2
+    CGCard
       span(slot='title') CG
       span(slot='subtitle') Art  Design  Computer Graphic
       span(slot='footer')
@@ -67,8 +67,8 @@ section
 import axios from 'axios'
 
 import GHCard from '~/components/cards/GHCard'
-import PlainCard from '~/components/cards/PlainCard'
-import PlainCard2 from '~/components/cards/PlainCard2'
+import GDCard from '~/components/cards/GDCard'
+import CGCard from '~/components/cards/CGCard'
 
 import Pug from '~/components/stack/Pug'
 import Jinja from '~/components/stack/Jinja'
@@ -84,8 +84,8 @@ export default
   components:
     {
       GHCard
-      PlainCard2
-      PlainCard
+      CGCard
+      GDCard
       GooCloud
       Nojs
       Nuxt
