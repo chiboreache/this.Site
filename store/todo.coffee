@@ -6,7 +6,7 @@ export state = ->
         bool: true
       }
       {
-        payload: 'Convert Flask Server into Flask API'
+        payload: 'Convert Flask Server into REST API'
         bool: false
       }
       {
