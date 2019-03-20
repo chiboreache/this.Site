@@ -1,5 +1,5 @@
 <template lang="pug">
-  .card-wrapper(:created='getGitHubData')
+  .card-wrapper
     .card-body(
       :class="{ cardBackface: cardBackfaceEnabled, cardHovered: isCardHovered }"
       :style="{ '--bg-comp': 'url(' + getImg + ')'}"
@@ -16,23 +16,21 @@
         header
             h1(
               :class="lenTitle"
-              v-text="repoName"
-              v-if='!link'
+              v-text="data.name"
+              v-if='!propLink'
               )
             a(
-              :href="'http://' + link"
+              :href="'http://' + propLink"
               v-else
               )
               h1(
                 :class="lenTitle"
-                v-text="repoName"
+                v-text="data.name"
                 )
             hr
-            h3 {{ description }}
+            h3 {{ data.description }}
             #dev
               p lenTitle is tooMuch: {{ lenTitle }}
-              //- p ratelimit: {{ ratelimit }}
-              p(v-once) ratelimit: {{ ratelimit }}
         main
           slot
         footer
@@ -40,8 +38,8 @@
             li stack-list slot
     .octocat-widget
       Octocat(
-        :stargazers='stargazersCount'
-        :url='htmlUrl'
+        :stargazers='data.stargazers_count'
+        :url='data.html_url'
       )
 </template>
 <script lang="coffee">
@@ -49,38 +47,26 @@ import axios from 'axios'
 import Octocat from '~/components/Octocat'
 export default
   name: 'ghcard'
-  props: ['repoName', 'link']
+  props: ['data', 'propLink']
   components:
     {
       Octocat
     }
   data: ->
-    statusText: ''
-    status: ''
-    stargazersCount: ''
-    description: ''
-    htmlUrl: ''
-    ratelimit: ''
-    url: 'https://api.github.com/repos/chiboreache/'
     urlImage: 'https://raw.githubusercontent.com/chiboreache/'
     cardBackfaceEnabled: false
     isCardHovered: false
   computed:
+    idd: -> @idd = @gh.data.id
     lenTitle: ->
-      if @repoName.length > 10
+      if @data.name.length > 10
         'tooMuch'
-    getGitHubData: ->
-      response = await axios.get(@url + @repoName)
-      @statusText = response.statusText
-      @status = response.status
-      @stargazersCount = response.data.stargazers_count
-      @description = response.data.description
-      @htmlUrl = response.data.html_url
-      @ratelimit = response.headers['x-ratelimit-remaining']
-    getImg: ->
-      @urlImage + @repoName + '/master/img/image-1.png'
+      else
+        false
+    getImg: -> @urlImage + @data.name + '/master/img/image-1.png'
 </script>
 <style lang="stylus" scoped>
+
 #dev
   position absolute
   tl(-10em)
@@ -122,11 +108,12 @@ export default
       line-height 1.2em
       padding-bottom 1em
   main
-    margin-top -23%
+    margin-top -37%
     font-style italic
     a
       text-decoration underline
     p
+      margin-bottom -0.7em
       font-size 1.05em
       font-weight 300
 </style>

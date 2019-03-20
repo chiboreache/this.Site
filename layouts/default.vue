@@ -17,7 +17,23 @@ section
           class='nl'
           to='/projects/todo'
         ) todo
+      li
+        nuxt-link(
+          class='nl'
+          to='/projects/exchange'
+        ) exchange
+      //- li
+      //-   nuxt-link(
+      //-     class='nl'
+      //-     to='/projects/fetch'
+      //-   ) fetch
+      //- li
+      //-   nuxt-link(
+      //-     class='nl'
+      //-     to='/projects/aframe'
+      //-   ) aframe
   nuxt
+
 </template>
 <style lang="stylus">
 .links

@@ -1,9 +1,10 @@
 <template lang="pug">
 section
   .horizon-scroller
+    p#dev     rateLimit: {{ ratelimit }}
     GHCard(
-      repoName='this.Site'
-      link='gvworks.appspot.com'
+      :data="findItem('this.Site')"
+      propLink='gvworks.appspot.com'
       )
       .stack(slot='stack-list'
         )
@@ -12,11 +13,11 @@ section
         Nuxt
         GooCloud
     GHCard(
-      repoName='EpicCSV'
-      link='epiccsv.herokuapp.com/upload/'
+      :data="findItem('EpicCSV')"
+      propLink='epiccsv.herokuapp.com/upload/'
       )
-      p(:created='getFireBaseCounter()') Which is already was uploaded {{ fireBaseCounter }} times!
-      p Here is a #[a(href="http://epiccsv.herokuapp.com/upload/table-dummy/") test link], so you can try it before upload your real csv file.
+      p Which is already was uploaded {{ fireBaseCounter }} times! <br> <small>and {{ fireBaseCounterDumb }} times for tests</small>
+      p Here is a #[a(href="http://epiccsv.herokuapp.com/upload/table-dummy/") test propLink], so you can try it before upload your real csv file.
       .stack(slot='stack-list'
         )
         Jinja
@@ -25,20 +26,20 @@ section
         Flask
         Herokku
     GHCard(
-      repoName='tblk'
+      :data="findItem('tblk')"
       )
       .stack(slot='stack-list'
         )
         Python
     GHCard(
-      repoName='pyb'
+      :data="findItem('pyb')"
       )
       .stack(slot='stack-list'
         )
         Python
     GHCard(
-      repoName='strSquarificator'
-      link='chiboreache.github.io/strSquarificator/'
+      :data="findItem('strSquarificator')"
+      propLink='chiboreache.github.io/strSquarificator/'
       )
       .stack(slot='stack-list'
         )
@@ -46,7 +47,7 @@ section
         Stylus
         Python
     GHCard(
-      repoName='Thumbnailificator'
+      :data="findItem('Thumbnailificator')"
       )
       .stack(slot='stack-list'
         )
@@ -96,16 +97,36 @@ export default
       Pug
       Python
     }
+  asyncData: ({ params }) ->
+    { data } = await axios.get('https://api.github.com/users/chiboreache/repos')
+    { response: data }
   head: ->
     title: 'GVWorks - Cards'
   data: ->
     fireBaseCounter: 'ƒ'
+    fireBaseCounterDumb: 'ƒ'
+    response: ''
+    ratelimit: ''
+  created: ->
+    @getFireBaseCounter()
+    @getFireBaseCounterDumb()
+    @getRatelimit()
   methods:
+    findItem: (query) ->
+      @response.find((item) -> item.name == query)
+    getRatelimit: ->
+      response = await axios.get 'https://api.github.com/'
+      @ratelimit = response.headers['x-ratelimit-remaining']
     getFireBaseCounter: ->
       response = await axios.get 'https://epiccsv.firebaseio.com/uploads.json'
       arr = Object.values(response.data)
       lastItem = arr[arr.length - 1]
       @fireBaseCounter = lastItem.id
+    getFireBaseCounterDumb: ->
+      response = await axios.get 'https://epiccsv.firebaseio.com/dummy-uploads.json'
+      arr = Object.values(response.data)
+      lastItem = arr[arr.length - 1]
+      @fireBaseCounterDumb = lastItem.id
 </script>
 <style lang="stylus" scoped>
 .stack
@@ -130,4 +151,6 @@ section
 ::-webkit-scrollbar
   width: 1px
   height: @width
+#dev
+  color transparent
 </style>

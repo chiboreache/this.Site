@@ -52,19 +52,12 @@ module.exports =
     [
       '@nuxtjs/style-resources'
       # '@nuxtjs/axios'
-      # '@nuxtjs/proxy'
       './modules/coffeescript'
     ]
-  # axios: {
-  #   proxyHeaders: true
-  #   proxyHeadersIgnore: true
-  #   # proxy: true
-  # }
-  # proxy:
-  #   '/projects/exchange/':
-  #     target: 'http://localhost:3000'
-  #     pathRewrite:
-  #       '^/projects/exchange/': ''
+  # axios:
+  #   {
+  #   }
+
 
   # Global CSS
   css:
