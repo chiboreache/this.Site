@@ -32,6 +32,11 @@ section
           class='nl'
           to='/nyam'
         ) nyam
+      li
+        nuxt-link(
+          class='nl'
+          to='/crud'
+        ) crud
   nuxt
 </template>
 <style lang="stylus">
