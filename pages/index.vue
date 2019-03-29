@@ -1,68 +1,71 @@
 <template lang="pug">
-section
-  .horizon-scroller
-    p#dev     rateLimit: {{ ratelimit }}
-    GHCard(
-      :data="findItem('this.Site')"
-      propLink='gvworks.appspot.com'
-      )
-      .stack(slot='stack-list'
+.cards
+  section
+    .horizon-scroller
+      p#dev     rateLimit: {{ ratelimit }}
+      GHCard(
+        :data="findItem('this.Site')"
+        propLink='gvworks.appspot.com'
         )
-        Pug
-        Stylus
-        Nuxt
-        GooCloud
-    GHCard(
-      :data="findItem('EpicCSV')"
-      propLink='epiccsv.herokuapp.com/upload/'
-      )
-      p Which is already was uploaded {{ fireBaseCounter }} times! <br> <small>and {{ fireBaseCounterDumb }} times for tests</small>
-      p Here is a #[a(href="http://epiccsv.herokuapp.com/upload/table-dummy/") test propLink], so you can try it before upload your real csv file.
-      .stack(slot='stack-list'
+        .stack(slot='stack-list'
+          )
+          Pug
+          Stylus
+          Nuxt
+          GooCloud
+      GHCard(
+        :data="findItem('EpicCSV')"
+        propLink='epiccsv.herokuapp.com/upload/'
         )
-        Jinja
-        Stylus
-        Nojs
-        Flask
-        Herokku
-    GHCard(
-      :data="findItem('tblk')"
-      )
-      .stack(slot='stack-list'
+        p Which is already was uploaded {{ fireBaseCounter }} times!
+          br
+          small and {{ fireBaseCounterDumb }} times for tests
+        p Here is a #[a(href="http://epiccsv.herokuapp.com/upload/table-dummy/") test link], so you can try it before upload your real csv file.
+        .stack(slot='stack-list'
+          )
+          Jinja
+          Stylus
+          Nojs
+          Flask
+          Herokku
+      GHCard(
+        :data="findItem('tblk')"
         )
-        Python
-    GHCard(
-      :data="findItem('pyb')"
-      )
-      .stack(slot='stack-list'
+        .stack(slot='stack-list'
+          )
+          Python
+      GHCard(
+        :data="findItem('pyb')"
         )
-        Python
-    GHCard(
-      :data="findItem('strSquarificator')"
-      propLink='chiboreache.github.io/strSquarificator/'
-      )
-      .stack(slot='stack-list'
+        .stack(slot='stack-list'
+          )
+          Python
+      GHCard(
+        :data="findItem('strSquarificator')"
+        propLink='chiboreache.github.io/strSquarificator/'
         )
-        Pug
-        Stylus
-        Python
-    GHCard(
-      :data="findItem('Thumbnailificator')"
-      )
-      .stack(slot='stack-list'
+        .stack(slot='stack-list'
+          )
+          Pug
+          Stylus
+          Python
+      GHCard(
+        :data="findItem('Thumbnailificator')"
         )
-        Python
-    GDCard
-      span(slot='title') GD
-      span(slot='subtitle') Unreal Engine 4  Epic Marketplace Game Development
-      span(slot='footer')
-        a(href='https://www.unrealengine.com/marketplace/en-US/profile/GVWorks?sessionInvalidated=true') Marketplace 
-        a(href='https://olegkondratov.artstation.com/') Artstation
-    CGCard
-      span(slot='title') CG
-      span(slot='subtitle') Art  Design  Computer Graphic
-      span(slot='footer')
-        a(href='https://www.behance.net/gvworks') Behance
+        .stack(slot='stack-list'
+          )
+          Python
+      GDCard
+        span(slot='title') GD
+        span(slot='subtitle') Unreal Engine 4  Epic Marketplace Game Development
+        span(slot='footer')
+          a(href='https://www.unrealengine.com/marketplace/en-US/profile/GVWorks?sessionInvalidated=true') Marketplace 
+          a(href='https://olegkondratov.artstation.com/') Artstation
+      CGCard
+        span(slot='title') CG
+        span(slot='subtitle') Art  Design  Computer Graphic
+        span(slot='footer')
+          a(href='https://www.behance.net/gvworks') Behance
 </template>
 <script lang="coffee">
 import axios from 'axios'
@@ -129,25 +132,29 @@ export default
       @fireBaseCounterDumb = lastItem.id
 </script>
 <style lang="stylus" scoped>
-.stack
+.cards
   display grid
-  grid-auto-flow column
-  place-content center
-section
-  .horizon-scroller
-    overflow scroll
-    overscroll-behavior contain
-    scroll-behavior smooth
-    transform rotate(-90deg) translate(-50vh, 0em)
-    transform-origin top left
-    width 50rem
-    height 100vw
-    position absolute
-    display block
-    padding-bottom 17em
-  .horizon-scroller > .card-wrapper
-    transform: rotate(90deg) translate(120%, -15vh)
-    transform-origin: right
+  place-items center left
+  hwv(98)
+  section
+    .horizon-scroller
+      overflow scroll
+      overscroll-behavior contain
+      scroll-behavior smooth
+      transform rotate(-90deg) translate(-50vh, 0em)
+      transform-origin top left
+      width 50rem
+      height 100vw
+      position absolute
+      display block
+      padding-bottom 17em
+      .stack
+        display grid
+        grid-auto-flow column
+        place-content center
+    .horizon-scroller > .card-wrapper
+      transform: rotate(90deg) translate(120%, -15vh)
+      transform-origin: right
 ::-webkit-scrollbar
   width: 1px
   height: @width

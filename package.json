@@ -1,6 +1,6 @@
 {
-  "name": "GVWorks",
-  "version": "0.0.4",
+  "name": "gvworks",
+  "version": "0.0.7",
   "description": "Home Page",
   "author": "Kron Austrum <huyach@protonmail.ch>",
   "private": true,
@@ -12,11 +12,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "*",
     "@nuxtjs/style-resources": "^0.1.2",
     "axios": "^0.18.0",
     "coffee-loader": "^0.8.0",
     "coffeescript": "^2.0.1",
+    "core-js": "^2.6.5",
+    "nuxt": "2.4.5",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "stylus": "^0.54.5",

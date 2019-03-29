@@ -3,19 +3,19 @@
   section(v-if='usd')
     label $ 
       input(
-        :placeholder='calcUSD'
+        :placeholder='calcUSD | toDecimal'
         readonly
         )
       span ₽
     label € 
       input(
-        :placeholder='calcEUR'
+        :placeholder='calcEUR | toDecimal'
         readonly
         )
       span ₽
     label ¥ 
       input(
-        :placeholder='calcCNY'
+        :placeholder='calcCNY | toDecimal'
         readonly
         )
       span ₽
@@ -93,26 +93,28 @@ export default
     # multCur: (arg) ->
     #   (arg * @factor).toFixed(2)
   computed:
-    calcUSD: -> (@usd * @factor).toFixed(2)
-    calcEUR: -> (@eur * @factor).toFixed(2)
-    calcCNY: -> (@cny * @factor).toFixed(2)
+    calcUSD: -> (@usd * @factor)
+    calcEUR: -> (@eur * @factor)
+    calcCNY: -> (@cny * @factor)
+  filters:
+    toDecimal: (i) -> i.toFixed(2)
 </script>
 <style lang="stylus" scoped>
 .exchange
     hwv(100)
     font-size 2.2em
-    right(5em)
+    tright(5em)
     section
       gcc()
-      down(20vh)
+      tdown(20vh)
       hr
         width 57%
-        left(35.5%)
+        tleft(35.5%)
         border 1.5px solid black
       .main
         padding-top 1em
         width 86%
-        right(0.4em)
+        tright(0.4em)
         &::after
         &::before
           content '❋'
@@ -122,7 +124,7 @@ export default
         font-size 1.1em
         width 20em
         input
-          down(.05em)
+          tdown(.05em)
           outline none
           border none
           background transparent

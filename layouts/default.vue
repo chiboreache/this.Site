@@ -22,24 +22,23 @@ section
           class='nl'
           to='/projects/exchange'
         ) exchange
-      //- li
-      //-   nuxt-link(
-      //-     class='nl'
-      //-     to='/projects/fetch'
-      //-   ) fetch
-      //- li
-      //-   nuxt-link(
-      //-     class='nl'
-      //-     to='/projects/aframe'
-      //-   ) aframe
+      li
+        nuxt-link(
+          class='nl'
+          to='/projects/color'
+        ) color
+      li
+        nuxt-link(
+          class='nl'
+          to='/nyam'
+        ) nyam
   nuxt
-
 </template>
 <style lang="stylus">
 .links
   position fixed
   z-index 88
-  tl(48.5%)
+  tdown(50vh)
   padding-right 1em
   padding-bottom 1em
   margin -1em
@@ -65,6 +64,8 @@ section
 *:before
 *:after
   box-sizing: inherit
+  outline none
+
 html
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif
@@ -76,13 +77,10 @@ html
   -webkit-font-smoothing: antialiased
   box-sizing border-box
 body
-  display grid
-  place-items center left
-  hwv(98)
   margin 0
   padding 0
-  overflow hidden
   background whitesmoke
+  // overflow hidden
 a:any-link
     color darkblue
 ::selection

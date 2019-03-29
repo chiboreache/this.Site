@@ -1,9 +1,12 @@
-hwpx(w,h=w)
+hwpx(h,w=h)
   height ((h)px)
   width ((w)px)
-hw(w,h=w)
+hw(h,w=h)
   height ((h)%)
   width ((w)%)
+hwe(h,w=h)
+  height ((h)em)
+  width ((w)em)
 hwv(h,w=h)
   height (h)vh
   width (w)vw
@@ -53,12 +56,42 @@ rdu(x=0,y=0,z=0)
   transform translate3d(x, y, z)
 
 
+
+
+
+tr(args...)
+  transform: args
+
+r(arg)
+  translateX(arg)
+l(arg)
+  translateX(-(arg))
+
+d(arg)
+  translateY(arg)
+u(arg)
+  translateY(-(arg))
+
+t(arg) // towards
+  translateZ(arg)
+
+s(x, y=x)
+  scale(x, y)
+
+sc(x, y=x)
+  transform: scale(x, y)
+
+
 right(x)
   transform translateX(x)
-left(x)
+tright = right
+tleft(x)
   transform translateX(-(x))
 down(y)
   transform translateY(y)
+tdown = down
+ttop(y)
+  transform translateY(-(y))
 up(z)
   transform translateZ(z)
 
@@ -71,6 +104,14 @@ tl(x=0,y=0)
   top x
   left y
 
+
+
+rx(x=0)
+  rotateX((x)deg)
+ry(y=0)
+  rotateY((y)deg)
+rz(z=0)
+  rotateZ((z)deg)
 
 
 rotx(x=0)

@@ -14,23 +14,22 @@
         v-show="!cardBackfaceEnabled"
         )
         header
+          h1(
+            :class="lenTitle"
+            v-text="data.name"
+            v-if='!propLink'
+            )
+          a(
+            :href="'http://' + propLink"
+            v-else
+            )
             h1(
               :class="lenTitle"
               v-text="data.name"
-              v-if='!propLink'
               )
-            a(
-              :href="'http://' + propLink"
-              v-else
-              )
-              h1(
-                :class="lenTitle"
-                v-text="data.name"
-                )
-            hr
-            h3 {{ data.description }}
-            #dev
-              p lenTitle is tooMuch: {{ lenTitle }}
+          hr
+          h3 {{ data.description }}
+        p#dev lenTitle is tooMuch: {{ lenTitle }}
         main
           slot
         footer
@@ -67,11 +66,6 @@ export default
 </script>
 <style lang="stylus" scoped>
 
-#dev
-  position absolute
-  tl(-10em)
-  color transparent
-  cursor default
 .content
   display: grid;
   place-content end
@@ -107,6 +101,11 @@ export default
       margin-top 0.5em
       line-height 1.2em
       padding-bottom 1em
+  p#dev
+    position absolute
+    ttop(10em)
+    color transparent
+    cursor default
   main
     margin-top -37%
     font-style italic

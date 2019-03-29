@@ -2,12 +2,7 @@ pkg = require './package'
 resolve = require('path').resolve
 
 module.exports =
-
   mode: 'universal'
-
-  #
-  # Headers of the page
-  #
   head:
     title: pkg.name
     meta:
@@ -31,23 +26,15 @@ module.exports =
         type: 'image/x-icon'
         href: '/favicon.ico'
       ]
-
-
-  # Customize the progress-bar color
   loading:
     {
       color: '#3B8070'
     }
-
-
-
-  # Plugins to load before mounting the App
   # plugins:
   #   [
+  #     '~/plugins/global.js'
+  #     '~/store/index.js'
   #   ]
-
-
-  # Nuxt.js modules
   modules:
     [
       '@nuxtjs/style-resources'
@@ -57,21 +44,15 @@ module.exports =
   # axios:
   #   {
   #   }
-
-
-  # Global CSS
   css:
     [
       '~assets/cardbase.styl'
     ]
-
-  # Global Stylus
   styleResources:
     stylus:
       [
         '~assets/mixins.styl'
       ]
-
   # build:
   #   extend = (config, ctx) ->
   #     # minimize: false

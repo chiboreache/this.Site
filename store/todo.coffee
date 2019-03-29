@@ -10,7 +10,7 @@ export state = ->
         bool: false
       }
       {
-        payload: 'Connect Pathfiy to Nuxt Vuex Store.'
+        payload: '[ ½ ] Connect Pathify to Nuxt Vuex Store.'
         bool: false
       }
       {
@@ -40,8 +40,7 @@ export state = ->
     ]
 
 export getters =
-  todos: (state) ->
-    return state.list
+  todos: (state) -> state.list
 
 export mutations =
   add: (state, payload) ->

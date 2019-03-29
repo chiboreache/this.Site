@@ -6,7 +6,7 @@
     )
     .stack-list
       .first(style='--first-bg-image: url(\
-        https://icons-for-free.com/free-icons/svg/128/1313568.svg \
+      https://cdn3.iconfinder.com/data/icons/social-media-logos-flat-colorful-1/2048/5351_-_CSS3-512.png \
       )')
 </template>
 <script lang="coffee">
