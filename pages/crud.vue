@@ -37,6 +37,7 @@
 </template>
 <script lang="coffee">
 import axios from 'axios'
+# btw — CORS proxy on the heroku hosting has a wakeup time
 axios.defaults.baseURL = 'https://cors-cbr.herokuapp.com/http://conquest.weekendads.ru'
 export default
   name: 'crud'
@@ -106,7 +107,7 @@ export default
 .crud
   gcc()
   line-height 0.5em
-  hvv(100)
+  hwv(100)
   padding-bottom 15em
   form
     hw(100)
