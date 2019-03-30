@@ -10,34 +10,48 @@
     input(type='text' v-model='pass' placeholder='pass')
     button(@click.prevent='logIn' ) LOGN
 
-  form#post(@keyup.enter='postData')
-    input(type='text' v-model='rname' placeholder='text')
-    input(type='number' step='0.01' v-model='rweight' placeholder='float')
-    button(@click.prevent='postData') POST
+  .login(v-if='token')
+    ul(v-for='item, key in tokenDecode')
+      li
+        span {{ key }}: 
+        span(v-text='item')
 
-  br
-  br
-  br
-  br
+    p issued at → {{ parseUnix(tokenDecode.iat) }}
+    | expiration → {{ parseUnix(tokenDecode.exp) }}
 
-  button#get(@click='getData') GET
-  .response(
-    v-for='item in res'
-    :key="item.id"
-    )
-    button(@click='delData(item.id)') DEL
-    input(type='text' v-model='item.name' :placeholder='item.name')
-    input(type='number' step='0.01' v-model='item.weight' :placeholder='item.weight')
-    button(@click='putData(item.id, item.name, item.weight)') PUT
+    br
+    br
+    br
+    form#post(@keyup.enter='postData')
+      input(type='text' v-model='rname' placeholder='text')
+      input(type='number' step='0.01' v-model='rweight' placeholder='float')
+      button(@click.prevent='postData') POST
 
-  br
-  br
-  br
+    br
+    br
+    br
+    br
+
+    button#get(@click='getData') GET
+    .response(
+      v-for='item in res'
+      :key="item.id"
+      )
+      button(@click='delData(item.id)') DEL
+      input(type='text' v-model='item.name' :placeholder='item.name')
+      input(type='number' step='0.01' v-model='item.weight' :placeholder='item.weight')
+      button(@click='putData(item.id, item.name, item.weight)') PUT
+
+    br
+    br
+    br
 
 </template>
 <script lang="coffee">
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 # btw — CORS proxy on the heroku hosting has a wakeup time
+# axios.defaults.baseURL = 'http://conquest.weekendads.ru'
 axios.defaults.baseURL = 'https://cors-cbr.herokuapp.com/http://conquest.weekendads.ru'
 export default
   name: 'crud'
@@ -46,11 +60,20 @@ export default
   data: ->
     res: null
     token: null
+    deToken: null
     rname: null
     rweight: null
     user: null
     pass: null
   methods:
+    parseUnix: (dateObj) ->
+      options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+      serverOffset = 0
+
+      d = new Date(dateObj * 1000)
+      d.setUTCHours(d.getUTCHours() + serverOffset)
+      d.toLocaleTimeString("ru-RU", options)
+
     logIn: ->
       res = await axios(
         method: 'post'
@@ -61,6 +84,7 @@ export default
           password: @pass
       )
       @token = res.data.token
+      @tokenDecode
 
     getData: ->
       res = await axios.get '/rabbit/list', headers: "Authorization": "Bearer #{@token}"
@@ -102,6 +126,8 @@ export default
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         )
+  computed:
+    tokenDecode: -> @deToken = jwtDecode(@token)
 </script>
 <style lang="stylus" scoped>
 .crud
@@ -112,4 +138,6 @@ export default
   form
     hw(100)
     margin-left 2em
+  #get
+    hw(100)
 </style>
