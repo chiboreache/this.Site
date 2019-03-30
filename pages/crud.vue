@@ -9,7 +9,7 @@
     button(disabled) LGN
     input(type='text' v-model='user' placeholder='user')
     input(type='text' v-model='pass' placeholder='pass')
-    button(@click.prevent='logIn' ) LGN
+    button(@click.prevent='logIn') LGN
 
   .login(v-if='token')
     ul(v-for='item, key in tokenDecode')
@@ -37,14 +37,14 @@
     br
 
     button#get(@click='getData') GET
-    .response(
+    form(
       v-for='item in res'
       :key="item.id"
       )
-      button(@click='delData(item.id)') DEL
+      button(@click.prevent='delData(item.id)') DEL
       input(type='text' v-model='item.name' :placeholder='item.name')
       input(type='number' step='0.01' v-model='item.weight' :placeholder='item.weight')
-      button(@click='putData(item.id, item.name, item.weight)') PUT
+      button(@click.prevent='putData(item.id, item.name, item.weight)') PUT
 
     br
     br
@@ -107,6 +107,7 @@ export default
       )
       @rname = null
       @rweight = null
+      @getData()
 
     putData: (id, name, weight) ->
       await axios(
@@ -126,6 +127,8 @@ export default
           "Authorization": "Bearer #{@token}"
           'Content-Type': 'application/x-www-form-urlencoded'
         )
+      @getData()
+
   computed:
     tokenDecode: -> @deToken = jwtDecode(@token)
 </script>
