@@ -7,8 +7,7 @@
         :data="findItem('this.Site')"
         propLink='gvworks.appspot.com'
         )
-        .stack(slot='stack-list'
-          )
+        template(#stack-list)
           Pug
           Stylus
           Nuxt
@@ -21,8 +20,7 @@
           br
           small and {{ fireBaseCounterDumb }} times for tests
         p Here is a #[a(href="http://epiccsv.herokuapp.com/upload/table-dummy/") test link], so you can try it before upload your real csv file.
-        .stack(slot='stack-list'
-          )
+        template(#stack-list)
           Jinja
           Stylus
           Nojs
@@ -31,40 +29,36 @@
       GHCard(
         :data="findItem('tblk')"
         )
-        .stack(slot='stack-list'
-          )
+        template(#stack-list)
           Python
       GHCard(
         :data="findItem('pyb')"
         )
-        .stack(slot='stack-list'
-          )
+        template(#stack-list)
           Python
       GHCard(
         :data="findItem('strSquarificator')"
         propLink='chiboreache.github.io/strSquarificator/'
         )
-        .stack(slot='stack-list'
-          )
+        template(#stack-list)
           Pug
           Stylus
           Python
       GHCard(
         :data="findItem('Thumbnailificator')"
         )
-        .stack(slot='stack-list'
-          )
+        template(#stack-list)
           Python
       GDCard
-        span(slot='title') GD
-        span(slot='subtitle') Unreal Engine 4  Epic Marketplace Game Development
-        span(slot='footer')
+        template(#title) GD
+        template(#subtitle) Unreal Engine 4  Epic Marketplace Game Development
+        template(#footer)
           a(href='https://www.unrealengine.com/marketplace/en-US/profile/GVWorks?sessionInvalidated=true') Marketplace 
           a(href='https://olegkondratov.artstation.com/') Artstation
       CGCard
-        span(slot='title') CG
-        span(slot='subtitle') Art  Design  Computer Graphic
-        span(slot='footer')
+        template(#title) CG
+        template(#subtitle) Art  Design  Computer Graphic
+        template(#footer)
           a(href='https://www.behance.net/gvworks') Behance
 </template>
 <script lang="coffee">
@@ -148,10 +142,6 @@ export default
       position absolute
       display block
       padding-bottom 17em
-      .stack
-        display grid
-        grid-auto-flow column
-        place-content center
     .horizon-scroller > .card-wrapper
       transform: rotate(90deg) translate(120%, -15vh)
       transform-origin: right

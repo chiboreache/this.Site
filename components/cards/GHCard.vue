@@ -115,4 +115,7 @@ export default
       margin-bottom -0.7em
       font-size 1.05em
       font-weight 300
+  footer
+    gcc()
+    grid-auto-flow column
 </style>

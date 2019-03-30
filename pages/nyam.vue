@@ -3,14 +3,14 @@
   .heading Ты сегодня покормил кота?
   .nyam-cards(v-if='response')
     CatCard(:data='response.foo' rgb=[22, 152, 217])
-      section(slot='gift')
+      template(#gift)
         p {{ response.foo.gift.p }}
     CatCard(:data='response.fish' rgb=[217, 22, 103])
-      section(slot='gift')
+      template(#gift)
         b {{ response.fish.gift.amount }} 
         | {{ response.fish.gift.p }}
     CatCard(:data='response.chicken' rgb=[22, 217, 125])
-      section(slot='gift')
+      template(#gift)
         b {{ response.chicken.gift.amount }} 
         | {{ response.chicken.gift.p }}
         p {{ response.chicken.gift.p2 }}
