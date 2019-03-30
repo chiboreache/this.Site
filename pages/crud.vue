@@ -6,26 +6,30 @@
   br
 
   form(@keyup.enter='logIn')
+    button(disabled) LGN
     input(type='text' v-model='user' placeholder='user')
     input(type='text' v-model='pass' placeholder='pass')
-    button(@click.prevent='logIn' ) LOGN
+    button(@click.prevent='logIn' ) LGN
 
   .login(v-if='token')
     ul(v-for='item, key in tokenDecode')
       li
         span {{ key }}: 
         span(v-text='item')
-
     p issued at → {{ parseUnix(tokenDecode.iat) }}
     | expiration → {{ parseUnix(tokenDecode.exp) }}
 
     br
     br
     br
+    br
+    br
+    br
     form#post(@keyup.enter='postData')
+      button(disabled) PST
       input(type='text' v-model='rname' placeholder='text')
       input(type='number' step='0.01' v-model='rweight' placeholder='float')
-      button(@click.prevent='postData') POST
+      button(@click.prevent='postData') PST
 
     br
     br
@@ -67,12 +71,14 @@ export default
     pass: null
   methods:
     parseUnix: (dateObj) ->
-      options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-      serverOffset = 0
-
-      d = new Date(dateObj * 1000)
-      d.setUTCHours(d.getUTCHours() + serverOffset)
-      d.toLocaleTimeString("ru-RU", options)
+      options =
+        {
+          weekday: 'long'
+          year: 'numeric'
+          month: 'long'
+          day: 'numeric'
+        }
+      new Date(dateObj * 1000).toLocaleTimeString("ru-RU", options)
 
     logIn: ->
       res = await axios(
@@ -95,10 +101,8 @@ export default
         method: 'post'
         url: "/rabbit"
         headers:
-          {
-            "Authorization": "Bearer #{@token}",
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
+          "Authorization": "Bearer #{@token}"
+          'Content-Type': 'application/x-www-form-urlencoded'
         data: "rabbit[name]=#{@rname}&rabbit[weight]=#{@rweight}"
       )
       @rname = null
@@ -109,10 +113,8 @@ export default
         method: 'post'
         url: "rabbit/#{id}"
         headers:
-          {
-            "Authorization": "Bearer #{@token}",
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
+          "Authorization": "Bearer #{@token}"
+          'Content-Type': 'application/x-www-form-urlencoded'
         data: "rabbit[name]=#{name}&rabbit[weight]=#{weight}"
       )
 
@@ -121,10 +123,8 @@ export default
         method: 'delete'
         url: "rabbit/#{id}"
         headers:
-          {
-            "Authorization": "Bearer #{@token}",
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
+          "Authorization": "Bearer #{@token}"
+          'Content-Type': 'application/x-www-form-urlencoded'
         )
   computed:
     tokenDecode: -> @deToken = jwtDecode(@token)
@@ -135,9 +135,6 @@ export default
   line-height 0.5em
   hwv(100)
   padding-bottom 15em
-  form
-    hw(100)
-    margin-left 2em
   #get
-    hw(100)
+    hw(99.2)
 </style>
