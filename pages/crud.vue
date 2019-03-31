@@ -5,13 +5,14 @@
   br
   br
 
-  form(@keyup.enter='logIn')
-    input(type='submit' value='       ' disabled)
-    input(autocomplete type='text' v-model='user' placeholder='user')
-    input(autocomplete type='text' v-model='pass' placeholder='pass')
-    input(type='submit' value='LOGIN' @click.prevent='logIn')
+  #login
+    form(@keyup.enter='logIn')
+      input(type='submit' value='          ' disabled)
+      input(type='text' v-model='user' placeholder='user')
+      input(type='text' v-model='pass' placeholder='pass')
+      input(type='submit' value='LOGIN' @click.prevent='logIn')
 
-  .login(v-if='token')
+  #response(v-if='token')
     ul(v-for='item, key in tokenDecode')
       li
         span {{ key }}: 
@@ -26,25 +27,25 @@
     br
     br
     form#post(@keyup.enter='postData')
-      input(type='submit' value='   ' disabled)
+      input(type='submit' value='          ' disabled)
       input(type='text' v-model='rname' placeholder='text')
       input(type='number' step='0.01' v-model='rweight' placeholder='float')
-      input(type='submit' value='PST' @click.prevent='postData')
+      input(type='submit' value=' POST ' @click.prevent='postData')
 
     br
     br
     br
     br
 
-    button#get(@click='getData') GET
+    input#get(type='submit' value='GET' @click='getData')
     form(
       v-for='item in res'
       :key="item.id"
       )
-      button(@click.prevent='delData(item.id)') DEL
+      input#del(type='submit' value='  DEL  ' @click.prevent='delData(item.id)')
       input(type='text' v-model='item.name' :placeholder='item.name')
       input(type='number' step='0.01' v-model='item.weight' :placeholder='item.weight')
-      button(@click.prevent='putData(item.id, item.name, item.weight)') PUT
+      input#put(type='submit' value='  PUT  ' @click.prevent='putData(item.id, item.name, item.weight)')
 
     br
     br
@@ -137,7 +138,7 @@ export default
   gcc()
   line-height 0.5em
   hwv(100)
-  padding-bottom 15em
+  padding-bottom 3em
   #get
-    hw(99.2)
+    hw(100)
 </style>
