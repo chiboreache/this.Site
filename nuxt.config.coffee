@@ -30,16 +30,15 @@ module.exports =
     {
       color: '#3B8070'
     }
-  # plugins:
-  #   [
-  #     '~/plugins/global.js'
-  #     '~/store/index.js'
-  #   ]
+  plugins:
+    [
+      './store/index.coffee'
+    ]
   modules:
     [
       '@nuxtjs/style-resources'
-      # '@nuxtjs/axios'
       './modules/coffeescript'
+      # '@nuxtjs/axios'
     ]
   # axios:
   #   {

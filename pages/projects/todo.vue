@@ -1,5 +1,5 @@
 <template lang="pug">
-section
+.todo
   ol
     li(
       v-for='(item, index) in todos'
@@ -11,50 +11,57 @@ section
         @change='toggle(item)'
         )
       span(
-        @click='removeTodo(item)'
+        @click='remove(item)'
         :class='{ done: item.bool }'
         v-text='item.payload'
         )
-    li#text
-      input(
-        placeholder='Just to do it!'
-        type='text'
-        @keyup.enter='addTodo'
-        )
+    form(
+      @submit.prevent='formAction'
+      )
+      li#text
+        input(
+          placeholder='Just to do it!'
+          type='text'
+          v-model='newTodo'
+          )
 </template>
 <script lang="coffee">
-import { mapMutations, mapGetters } from 'vuex'
+import { get } from 'vuex-pathify'
 export default
   head: ->
     title: 'Just to do it!'
+    link:
+      [
+        {
+          href: 'https://fonts.googleapis.com/css?family=Lora:400,700'
+          rel: 'stylesheet'
+        }
+      ]
+  data: ->
+    newTodo: null
   methods:
-    {
-      addTodo: (e) ->
-        input = e.target.value
-        if input.trim()
-          @$store.commit('todo/add', input)
-        e.target.value = ''
-      removeTodo: (item) ->
-        @$store.commit('todo/remove', item)
-      mapMutations(
-        toggle: 'todo/toggle'
-      )...
-    }
+    add: (item) ->
+      @$store.set('todo/ADD!', item)
+    remove: (item) ->
+      @$store.set('todo/REMOVE!', item)
+    toggle: (item) ->
+      @$store.set('todo/TOGGLE!', item)
+    formAction: ->
+      if @newTodo
+        @add(@newTodo)
+        @newTodo = null
   computed:
     {
-      mapGetters(
-        todos: 'todo/todos'
-      )...
+      get('todo/*')...
     }
 </script>
 <style lang="stylus" scoped>
-@import url('https://fonts.googleapis.com/css?family=Lora:400,700')
 .done
   text-decoration: line-through
-section
+.todo
   gcc()
   hwv(99)
-  right(4.3em)
+  tright(4.3em)
   font-family: 'Lora', serif;
   ol
     width 65vw

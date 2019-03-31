@@ -6,10 +6,10 @@
   br
 
   form(@keyup.enter='logIn')
-    button(disabled) LGN
-    input(type='text' v-model='user' placeholder='user')
-    input(type='text' v-model='pass' placeholder='pass')
-    button(@click.prevent='logIn') LGN
+    input(type='submit' value='       ' disabled)
+    input(autocomplete type='text' v-model='user' placeholder='user')
+    input(autocomplete type='text' v-model='pass' placeholder='pass')
+    input(type='submit' value='LOGIN' @click.prevent='logIn')
 
   .login(v-if='token')
     ul(v-for='item, key in tokenDecode')
@@ -26,10 +26,10 @@
     br
     br
     form#post(@keyup.enter='postData')
-      button(disabled) PST
+      input(type='submit' value='   ' disabled)
       input(type='text' v-model='rname' placeholder='text')
       input(type='number' step='0.01' v-model='rweight' placeholder='float')
-      button(@click.prevent='postData') PST
+      input(type='submit' value='PST' @click.prevent='postData')
 
     br
     br

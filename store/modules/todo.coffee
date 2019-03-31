@@ -10,8 +10,8 @@ export state = ->
         bool: false
       }
       {
-        payload: '[ ½ ] Connect Pathify to Nuxt Vuex Store.'
-        bool: false
+        payload: 'Connect Pathify to Nuxt Vuex Store.'
+        bool: true
       }
       {
         payload: 'Xmodmap generator with heatmap.'
@@ -43,16 +43,24 @@ export getters =
   todos: (state) -> state.list
 
 export mutations =
-  add: (state, payload) ->
+  ADD: (state, payload) ->
     state.list.push(
       {
         payload
         bool: false
       }
     )
-  remove: (state, payload) ->
+  REMOVE: (state, payload) ->
     state.list.splice(
       state.list.indexOf(payload), 1
     )
-  toggle: (state, payload) ->
+  TOGGLE: (state, payload) ->
     payload.bool = !payload.bool
+
+export default
+  {
+    namespaced: true
+    state
+    getters
+    mutations
+  }

@@ -85,7 +85,7 @@ body
   margin 0
   padding 0
   background whitesmoke
-  // overflow hidden
+  overflow hidden
 a:any-link
     color darkblue
 ::selection
