@@ -51,6 +51,16 @@
     br
     br
 
+  #audit(v-if='token')
+    b Possible vulnerabilities:
+    ol
+      li HTTPS — to prevent MITM attack
+      li HTTP — also allowing some Injections hack input forms
+      li proper HTTP method — POST instead PUT
+      li to be honest, server doesn't allow to create item with random ID, but still
+      li auto-incremented ID's instead UUID
+      li missing some security headers
+
 </template>
 <script lang="coffee">
 import axios from 'axios'
@@ -136,9 +146,16 @@ export default
 <style lang="stylus" scoped>
 .crud
   gcc()
-  line-height 0.5em
   hwv(100)
+  line-height 0.5em
   padding-bottom 3em
+  #audit
+    hwe(14.5, 32.2)
+    line-height 1.3em
+    font-size 0.9em
+    padding 1em
+    border 3px dashed rgba(255, 100, 100, 0.6)
+    background rgba(255, 200, 200, 0.3)
   #get
     hw(100)
 </style>
