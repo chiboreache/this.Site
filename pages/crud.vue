@@ -4,15 +4,13 @@
   br
   br
   br
-
-  #login
+  #login(v-if='!token')
     form(@keyup.enter='logIn')
       input(type='submit' value='          ' disabled)
       input(type='text' v-model='user' placeholder='user')
       input(type='text' v-model='pass' placeholder='pass')
       input(type='submit' value='LOGIN' @click.prevent='logIn')
-
-  #response(v-if='token')
+  #response(v-else)
     ul(v-for='item, key in tokenDecode')
       li
         span {{ key }}: 
@@ -51,15 +49,18 @@
     br
     br
 
-  #audit(v-if='token')
-    b Possible vulnerabilities:
-    ol
-      li HTTPS — to prevent MITM attack
-      li HTTP — also allowing some Injections hack input forms
-      li proper HTTP method — POST instead PUT
-      li to be honest, server doesn't allow to create item with random ID, but still
-      li auto-incremented ID's instead UUID
-      li missing some security headers
+    #audit(v-show='token')
+      b Possible vulnerabilities:
+      ol
+        li HTTPS — to prevent MITM attack
+        li HTTP — also allowing some Injections hack input forms
+        li proper HTTP method — POST instead PUT
+        li to be honest, server doesn't allow to create item with random ID, but still
+        li auto-incremented ID's instead UUID
+        li missing some security headers
+    br
+
+    input#logout(type='submit' value='LOGOUT' @click='removeCookie')
 
 </template>
 <script lang="coffee">
@@ -80,6 +81,9 @@ export default
     rweight: null
     user: null
     pass: null
+
+  mounted: -> @loadCookies()
+
   methods:
     parseUnix: (dateObj) ->
       options =
@@ -91,6 +95,14 @@ export default
         }
       new Date(dateObj * 1000).toLocaleTimeString("ru-RU", options)
 
+    tokenToCookie: (token) -> @$cookies.set(
+      'tokenJWT_cookie'
+      token
+      {
+        expires: 1/24
+        path: '/crud'
+      })
+
     logIn: ->
       res = await axios(
         method: 'post'
@@ -101,6 +113,7 @@ export default
           password: @pass
       )
       @token = res.data.token
+      @tokenToCookie(@token)
       @tokenDecode
 
     getData: ->
@@ -140,8 +153,16 @@ export default
         )
       @getData()
 
+    cookies: -> @$cookies.cookies
+    loadCookies: -> @token = @$cookies.cookies.tokenJWT_cookie
+    getCookies: -> @$Cookies.get('tokenJWT_cookie', {path:'/crud'})
+    removeCookie: ->
+      @$cookies.remove 'tokenJWT_cookie', {path:'/crud'}
+      location.reload(true)
+
   computed:
     tokenDecode: -> @deToken = jwtDecode(@token)
+
 </script>
 <style lang="stylus" scoped>
 .crud
@@ -157,5 +178,6 @@ export default
     border 3px dashed rgba(255, 100, 100, 0.6)
     background rgba(255, 200, 200, 0.3)
   #get
+  #logout
     hw(100)
 </style>

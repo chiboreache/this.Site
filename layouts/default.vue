@@ -3,40 +3,19 @@ section
   .links
     ul
       li
-        nuxt-link(
-          to='/'
-          class='nl'
-        ) cards
+        nuxt-link(to='/') cards
       li
-        nuxt-link(
-          class='nl'
-          to='/projects/equation'
-        ) equation
+        nuxt-link(to='/projects/equation') equation
       li
-        nuxt-link(
-          class='nl'
-          to='/projects/todo'
-        ) todo
+        nuxt-link(to='/projects/todo') todo
       li
-        nuxt-link(
-          class='nl'
-          to='/projects/exchange'
-        ) exchange
+        nuxt-link(to='/projects/exchange') exchange
       li
-        nuxt-link(
-          class='nl'
-          to='/projects/color'
-        ) color
+        nuxt-link(to='/projects/color') color
       li
-        nuxt-link(
-          class='nl'
-          to='/nyam'
-        ) nyam
+        nuxt-link(to='/nyam') nyam
       li
-        nuxt-link(
-          class='nl'
-          to='/crud'
-        ) crud
+        nuxt-link(to='/crud') crud
   nuxt
 </template>
 <style lang="stylus">
@@ -54,7 +33,7 @@ section
     padding-left 1.5em
     li
       padding-top: 0.7em
-      .nl
+      & >
         &:any-link
           color: gray
           text-decoration: underline dashed
@@ -91,4 +70,40 @@ a:any-link
 ::selection
   background black
   color white
+
+.page-enter-active
+.page-leave-active
+  transition: opacity 0.3s
+.page-enter
+.page-leave-active
+  opacity: 0
+.bounce-enter-active
+  animation: bounce-in .8s
+.bounce-leave-active
+  animation: bounce-out .5s
+
+@keyframes bounce-in
+  0% transform scale(0)
+  50% transform scale(1.5)
+  100% transform scale(1)
+
+@keyframes bounce-out
+  0% transform scale(1)
+  50% transform scale(1.5)
+  100% transform scale(0)
+
+.slide-left-enter
+.slide-right-leave-active
+  opacity: 0
+  transform: translate(30px, 0)
+.slide-left-leave-active
+.slide-right-enter
+  opacity: 0
+  transform: translate(-30px, 0)
+.fade-enter
+.fade-leave-active
+  opacity: 0
+.fade-leave-active
+.fade-enter
+  opacity: 0
 </style>

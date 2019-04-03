@@ -32,7 +32,8 @@ module.exports =
     }
   plugins:
     [
-      './store/index.coffee'
+      '~/store/index.coffee'
+      '~/plugins/cookies'
     ]
   modules:
     [
