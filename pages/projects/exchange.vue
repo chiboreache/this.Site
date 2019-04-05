@@ -1,21 +1,21 @@
 <template lang="pug">
 .exchange
-  section(v-if='usd')
+  section(v-if='listItems')
     label $ 
       input(
-        :placeholder='calcUSD | toDecimal'
+        :placeholder='animUSD | toDecimal'
         readonly
         )
       span ₽
     label € 
       input(
-        :placeholder='calcEUR | toDecimal'
+        :placeholder='animEUR | toDecimal'
         readonly
         )
       span ₽
     label ¥ 
       input(
-        :placeholder='calcCNY | toDecimal'
+        :placeholder='animCNY | toDecimal'
         readonly
         )
       span ₽
@@ -23,6 +23,8 @@
     label.main
       input(
         v-model='factor'
+        @wheel='wheelFactor'
+        title='Use your scroll wheel or just type a new value'
         id='main'
         )
   section(v-else)
@@ -56,42 +58,45 @@ import axios from 'axios'
 export default
   head: ->
     title: 'exchange'
+    script: [{ src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenLite.min.js" }]
   data: ->
-    usd: ''
-    eur: ''
-    cny: ''
+    listItems: null
+    usd: 0
+    eur: 0
+    cny: 0
+    animUSD: 0
+    animEUR: 0
+    animCNY: 0
     factor: 1
   created: -> @getData()
+  mounted: ->
+    if @listItems
+      @procData()
+  watch:
+    calcUSD: (update) -> TweenLite.to(@$data, 0.5, { animUSD: update })
+    calcEUR: (update) -> TweenLite.to(@$data, 0.5, { animEUR: update })
+    calcCNY: (update) -> TweenLite.to(@$data, 0.5, { animCNY: update })
   methods:
-    # getDateNow: ->
-    #   dt = new Date
-    #   nowDay = dt.getUTCDate().toString().padStart(2, '0')
-    #   nowMonth = (dt.getUTCMonth() + 1).toString().padStart(2, '0')
-    #   nowYear = dt.getUTCFullYear()
-    #   return "#{nowDay}/#{nowMonth}/#{nowYear}/"
-
+    wheelFactor: (e) ->
+      if e.deltaY < 0
+        @factor += 1
+      if e.deltaY > 0
+        @factor -= 1
     currencyFilter: (list, currency) ->
       list.filter (item) -> item.CharCode['_text'] == currency
-
     getValue: (item) -> parseFloat(item[0].Value['_text'].replace(',', '.'))
-
     getData: ->
       convert = require('xml-js')
-
       proxy = 'https://cors-cbr.herokuapp.com/'
       url = 'https://www.cbr.ru/scripts/XML_daily_eng.asp'
-
       xml = await axios.get proxy + url
-
       result = convert.xml2js xml.data, { compact: true, spaces: 4 }
-      listItems = result.ValCurs.Valute
-
-      @usd = @getValue(@currencyFilter(listItems, 'USD'))
-      @eur = @getValue(@currencyFilter(listItems, 'EUR'))
-      @cny = @getValue(@currencyFilter(listItems, 'CNY'))
-
-    # multCur: (arg) ->
-    #   (arg * @factor).toFixed(2)
+      @listItems = result.ValCurs.Valute
+      @procData()
+    procData: ->
+      @usd = @getValue(@currencyFilter(@listItems, 'USD'))
+      @eur = @getValue(@currencyFilter(@listItems, 'EUR'))
+      @cny = @getValue(@currencyFilter(@listItems, 'CNY'))
   computed:
     calcUSD: -> (@usd * @factor)
     calcEUR: -> (@eur * @factor)
@@ -102,11 +107,11 @@ export default
 <style lang="stylus" scoped>
 .exchange
     hwv(100)
+    gcc()
     font-size 2.2em
     tright(5em)
     section
       gcc()
-      tdown(20vh)
       hr
         width 57%
         tleft(35.5%)
