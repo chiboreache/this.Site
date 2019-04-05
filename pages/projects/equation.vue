@@ -53,20 +53,16 @@ section
     head: ->
       title: 'Proportional Calculator'
     data: ->
-      x1: ''
-      x2: ''
-      y1: ''
-      y2: ''
+      x1: null
+      x2: null
+      y1: null
+      y2: null
       title: 'Press «Enter» or «RMB» to provide a calculation'
     methods:
-      calcX1: ->
-        @x1 = (@x2 * @y1) / @y2
-      calcY1: ->
-        @y1 = (@x1 * @y2) / @x2
-      calcX2: ->
-        @x2 = (@x1 * @y2) / @y1
-      calcY2: ->
-        @y2 = (@x2 * @y1) / @x1
+      calcX1: -> @x1 = (@x2 * @y1) / @y2
+      calcY1: -> @y1 = (@x1 * @y2) / @x2
+      calcX2: -> @x2 = (@x1 * @y2) / @y1
+      calcY2: -> @y2 = (@x2 * @y1) / @x1
 </script>
 <style lang="stylus" scoped>
 .grid
