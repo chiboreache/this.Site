@@ -75,19 +75,17 @@ export default
         @isLeaved=false
 </script>
 <style lang="stylus" scoped>
+.fade-enter-active
+.fade-leave-active
+  transition opacity 0.2s
+.fade-enter
+.fade-leave-to
+  opacity: 0
 
 .disabled
   filter contrast(0.4) brightness(1.2) grayscale(0.7)
   cursor not-allowed
   pointer-events none
-
-.fade-enter-active
-.fade-leave-active
-  transition 0.2s
-
-.fade-enter
-.fade-leave-to
-  opacity: 0
 
 fonts = {
   title: 48px

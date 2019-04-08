@@ -1,25 +1,34 @@
 <template lang="pug">
-section
-  .links
-    ul
-      li
-        nuxt-link(to='/') cards
-      li
-        nuxt-link(to='/projects/equation') equation
-      li
-        nuxt-link(to='/projects/todo') todo
-      li
-        nuxt-link(to='/projects/exchange') exchange
-      li
-        nuxt-link(to='/projects/color') color
-      li
-        nuxt-link(to='/nyam') nyam
-      li
-        nuxt-link(to='/crud') crud
+.default-page
+  transition(name="fade")
+    nav(v-show='isGreeted')
+      ul
+        li
+          nuxt-link(to='/') cards
+        li
+          nuxt-link(to='/projects/exchange') exchange
+        li
+          nuxt-link(to='/projects/equation') equation
+        li
+          nuxt-link(to='/projects/todo') todo
+        li
+          nuxt-link(to='/projects/color') color
+        li
+          nuxt-link(to='/crud') crud
+        li
+          nuxt-link(to='/nyam') nyam
   nuxt
 </template>
+<script lang="coffee">
+import { get } from 'vuex-pathify'
+export default
+  name: 'default'
+  computed:
+    splashGreet: -> get('main/splashGreet')
+    isGreeted: -> @$cookies.cookies.SplashScreenDone
+</script>
 <style lang="stylus">
-.links
+nav
   position fixed
   z-index 88
   tdown(50vh)
@@ -73,37 +82,26 @@ a:any-link
 
 .page-enter-active
 .page-leave-active
-  transition: opacity 0.3s
+  transition: all 0.9s cubic-bezier(.66,-0.84,.5,1.6)
+  transform-origin 100% 50%
 .page-enter
 .page-leave-active
   opacity: 0
-.bounce-enter-active
-  animation: bounce-in .8s
-.bounce-leave-active
-  animation: bounce-out .5s
+  tr( u(90vh) r(50vw) rz(-160deg) )
 
-@keyframes bounce-in
-  0% transform scale(0)
-  50% transform scale(1.5)
-  100% transform scale(1)
-
-@keyframes bounce-out
-  0% transform scale(1)
-  50% transform scale(1.5)
-  100% transform scale(0)
-
-.slide-left-enter
-.slide-right-leave-active
-  opacity: 0
-  transform: translate(30px, 0)
-.slide-left-leave-active
-.slide-right-enter
-  opacity: 0
-  transform: translate(-30px, 0)
-.fade-enter
+.fade-enter-active
 .fade-leave-active
-  opacity: 0
-.fade-leave-active
+  transition opacity 1s
 .fade-enter
+.fade-leave-to
   opacity: 0
+
+.list-enter-active
+.list-leave-active
+  transition all 1s
+.list-enter
+.list-leave-to
+  opacity 0
+  tdown(1em)
+
 </style>

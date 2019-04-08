@@ -1,5 +1,4 @@
 <template lang="pug">
-section
   .grid
     .equation
       .input1

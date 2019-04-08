@@ -28,7 +28,8 @@ module.exports =
       ]
   loading:
     {
-      color: '#3B8070'
+      color: '#0056FD'
+      height: '5px'
     }
   plugins:
     [

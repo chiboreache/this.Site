@@ -50,13 +50,12 @@ export mutations =
         bool: false
       }
     )
-  REMOVE: (state, payload) ->
-    state.list.splice(
-      state.list.indexOf(payload), 1
-    )
-  TOGGLE: (state, payload) ->
-    payload.bool = !payload.bool
-
+  TOGGLE: (state, payload) -> payload.bool = !payload.bool
+  REMOVE: (state, payload) -> state.list.splice(payload, 1)
+  # REMOVE: (state, payload) ->
+  #   state.list.splice(
+  #     state.list.indexOf(payload), 1
+  #   )
 export default
   {
     namespaced: true

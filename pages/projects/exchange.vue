@@ -1,57 +1,58 @@
 <template lang="pug">
-.exchange
-  section(v-if='listItems')
-    label $ 
-      input(
-        :placeholder='animUSD | toDecimal'
-        readonly
-        )
-      span ₽
-    label € 
-      input(
-        :placeholder='animEUR | toDecimal'
-        readonly
-        )
-      span ₽
-    label ¥ 
-      input(
-        :placeholder='animCNY | toDecimal'
-        readonly
-        )
-      span ₽
-    hr
-    label.main
-      input(
-        v-model='factor'
-        @wheel='wheelFactor'
-        title='Use your scroll wheel or just type a new value'
-        id='main'
-        )
-  section(v-else)
-    label $ 
-      input(
-        placeholder='Heroku is'
-        readonly
-        )
-      span ₽
-    label € 
-      input(
-        placeholder='waking up now'
-        readonly
-        )
-      span ₽
-    label ¥ 
-      input(
-        placeholder='please wait...'
-        readonly
-        )
-      span ₽
-    hr
-    label.main
-      input(
-        placeholder='Thanks 😄'
-        id='main'
-        )
+.grid
+  .exchange
+    template(v-if='listItems')
+      label $ 
+        input(
+          :placeholder='animUSD | toDecimal'
+          readonly
+          )
+        span ₽
+      label € 
+        input(
+          :placeholder='animEUR | toDecimal'
+          readonly
+          )
+        span ₽
+      label ¥ 
+        input(
+          :placeholder='animCNY | toDecimal'
+          readonly
+          )
+        span ₽
+      hr
+      label.main
+        input(
+          v-model='factor'
+          @wheel='wheelFactor'
+          title='Use your scroll wheel or just type a new value'
+          id='main'
+          )
+    template(v-else)
+      label $ 
+        input(
+          placeholder='Heroku is'
+          readonly
+          )
+        span ₽
+      label € 
+        input(
+          placeholder='waking up now'
+          readonly
+          )
+        span ₽
+      label ¥ 
+        input(
+          placeholder='please wait...'
+          readonly
+          )
+        span ₽
+      hr
+      label.main
+        input(
+          placeholder='Thanks 😄'
+          id='main'
+          )
 </template>
 <script lang="coffee">
 import axios from 'axios'
@@ -105,35 +106,35 @@ export default
     toDecimal: (i) -> i.toFixed(2)
 </script>
 <style lang="stylus" scoped>
-.exchange
-    hwv(100)
+.grid
+  gci()
+  hwv(100)
+  .exchange
     gcc()
+    margin-right -25%
     font-size 2.2em
-    tright(5em)
-    section
-      gcc()
-      hr
-        width 57%
-        tleft(35.5%)
-        border 1.5px solid black
-      .main
-        padding-top 1em
-        width 86%
-        tright(0.4em)
-        &::after
-        &::before
-          content '❋'
-          font-size 1em
-      label
-        padding 0.5em
-        font-size 1.1em
-        width 20em
-        input
-          tdown(.05em)
-          outline none
-          border none
-          background transparent
-          font-size 1.2em
-          width 50%
-          text-align center
+    hr
+      width 57%
+      tleft(35.5%)
+      border 1.5px solid black
+    .main
+      padding-top 1em
+      width 86%
+      tright(0.5em)
+      &::after
+      &::before
+        content '❋'
+        font-size 1em
+    label
+      padding 0.5em
+      font-size 1.1em
+      width 20em
+      input
+        tdown(.05em)
+        outline none
+        border none
+        background transparent
+        font-size 1.2em
+        width 50%
+        text-align center
 </style>

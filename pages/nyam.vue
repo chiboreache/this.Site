@@ -1,5 +1,5 @@
 <template lang="pug">
-.nyam
+.nyam(lang="ru")
   .heading Ты сегодня покормил кота?
   .nyam-cards(v-if='response')
     CatCard(:data='response.foo' rgb=[22, 152, 217])
@@ -49,6 +49,7 @@ export default
 <style lang="stylus">
 .nyam
   gci()
+  overflow-y scroll
   background:
     linear-gradient(
       180deg,

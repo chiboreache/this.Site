@@ -31,9 +31,9 @@ export default
       border 3em solid gray
       outline none
       cursor pointer
+      -webkit-appearance: none
       &
       &::-webkit-color-swatch-wrapper
+      &::-webkit-color-swatch
         padding 0
-// -webkit-appearance: none
-// ::-webkit-color-swatch
 </style>

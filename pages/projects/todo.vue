@@ -1,20 +1,21 @@
 <template lang="pug">
 .todo
   ol
-    li(
-      v-for='(item, index) in todos'
-      :key='index'
-      )
-      input(
-        :checked='item.bool'
-        type='checkbox'
-        @change='toggle(item)'
+    transition-group(name="list")
+      li(
+        v-for='(item, index) in todos'
+        :key='item.payload'
         )
-      span(
-        @click='remove(item)'
-        :class='{ done: item.bool }'
-        v-text='item.payload'
-        )
+        input(
+          :checked='item.bool'
+          type='checkbox'
+          @change='toggle(item)'
+          )
+        span(
+          :class='{ done: item.bool }'
+          v-text='item.payload'
+          )
+        button( @click='remove(index)' ) ⊗
     form(
       @submit.prevent='formAction'
       )
@@ -52,7 +53,7 @@ export default
         @newTodo = null
   computed:
     {
-      get('todo/*')...
+      ...get('todo/*')
     }
 </script>
 <style lang="stylus" scoped>
@@ -60,19 +61,27 @@ export default
   text-decoration: line-through
 .todo
   gcc()
-  hwv(99)
-  tright(4.3em)
+  hwv(90)
+  place-content right
   font-family: 'Lora', serif;
   ol
     width 65vw
     li
+      transition all 1s
       list-style-type: upper-roman
       padding-top 1.3em
       span
         font-size 1.2em
         font-weight 550
         padding-left  0.3em
+      button
+        outline none
+        border none
+        background none
+        font-size 1.2em
         cursor pointer
+        tdown 0.1em
+        margin-left 0.2em
     li#text
       list-style-type: none
       padding-top 2.1em
