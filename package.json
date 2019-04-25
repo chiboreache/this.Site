@@ -5,9 +5,9 @@
   "author": "Kron Austrum <huyach@protonmail.ch>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt dev",
     "build": "nuxt build",
-    "deploy": "nuxt build && echo 'Y' | gcloud app deploy app.yaml",
+    "deploy": "nuxt build -m && echo 'Y' | gcloud app deploy app.yaml",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
@@ -25,7 +25,9 @@
     "pug-plain-loader": "^1.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "three": "^0.104.0",
+    "vue-three": "^0.1.20"
   },
   "devDependencies": {
     "@babel/runtime-corejs2": "^7.4.3",

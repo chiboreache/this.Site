@@ -6,15 +6,19 @@
         li
           nuxt-link(to='/') cards
         li
-          nuxt-link(to='/projects/exchange') exchange
-        li
           nuxt-link(to='/projects/equation') equation
         li
+          nuxt-link(to='/projects/exchange') exchange
+        li
           nuxt-link(to='/projects/todo') todo
+        li
+          nuxt-link(to='/three') three
         li
           nuxt-link(to='/projects/color') color
         li
           nuxt-link(to='/crud') crud
+        li
+          nuxt-link(to='/uech') uech
         li
           nuxt-link(to='/nyam') nyam
   nuxt

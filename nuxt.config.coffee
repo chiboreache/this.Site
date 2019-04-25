@@ -54,7 +54,9 @@ module.exports =
       [
         '~assets/mixins.styl'
       ]
-  # build:
+  serverMiddleware: ['~/serverMiddleware/selectiveSSR.js']
+  build:
+    vendor: ['three', 'vue-three']
   #   extend = (config, ctx) ->
   #     # minimize: false
   #     parallel: true
